@@ -9,9 +9,13 @@ Manuscript under review, further details to come.
 
 -----------------------------------------------------
 ### Download LD-ABF supplemental files.
+
+Supplemental files from the manuscript can be found online here:
  
 [Genome Wide scan of CHOP Trios](https://upenn.box.com/s/yikbstl82z8g5negl7mbwd7epqapkab5), 
 [HLA genes from IHIW](https://upenn.box.com/s/vqtso3lhyckwuud0qpjpkp1yd8hx636j)
+
+This includes the statistics for each of the different populations for the two different data sets along with some additional plots and tables. 
 
 ## Running LD-ABF
 
