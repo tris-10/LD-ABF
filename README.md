@@ -22,7 +22,7 @@ This includes the statistics for each of the different populations for the two d
 LD-ABF is a test statistic that measures the amount of LD and density around a given SNP. 
 
 ![Figure 1](https://github.com/tris-10/LD-ABF/blob/main/figures/BalancingSelectionOverTime.jpg)
-
+*Figure 1 Diagram depicting the progression of an allele under balancing selection, the green X. In the first pane the variant is introduced on a single haplotype. Then after some time has passed evolutionary pressures favoring heterozygotes at the position of focus maintaining both haplotypes with and without the polymorphism, where hitchhiking effects are observed between the variant under balancing selection–inducing LD patterns.  Recombination breaks the strong LD resulting in mosaics of the haplotypes, where strong hotspots will diffuse the effects. *
 
 Python 3.7 and libraries required: `os, sys, argparse, time, datetime, pstats, cProfile, scipy, cython, shutil, glob, numpy, pandas, scipy, statsmodels, collections, itertools` 
 
