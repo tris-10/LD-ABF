@@ -15,7 +15,10 @@ Manuscript under review, further details to come.
 
 ## Running LD-ABF
 
-LD-ABF is  
+LD-ABF is a test statistic that measures the ammount of LD and density around a given SNP. 
+
+![Figure 1](https://github.com/tris-10/LD-ABF/blob/main/figures/BalancingSelectionOverTime.jpg)
+
 
 Python 3.7 and libraries required: `os, sys, argparse, time, datetime, pstats, cProfile, scipy, cython, shutil, glob, numpy, pandas, scipy, statsmodels, collections, itertools` 
 
