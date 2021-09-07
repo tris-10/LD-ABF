@@ -5,7 +5,14 @@ Abstract:
 
 Balancing selection occurs when different evolutionary pressures impact the fitness of multiple alleles, resulting in increased allelic diversity in the population. A new statistical method was developed to test for selection, improving inference by using efficient Bayesian techniques to test for density and strength of linkage disequilibrium. Evolutionary simulation studies showed that the method consistently outperformed existing methods. Using this methodology, we tested for novel signals of balancing selection genome wide in 500 samples from phased trios, combining both SNP array and exome sequencing data. Several novel signals of selection appeared in CYP2A7, GPC6, and CNR2 across multiple ancestries. Additionally, tests in SIRPA demonstrate dramatically strong selection signal, significantly higher than previously observed. Well-known signals around olfactory genes and the MHC, containing HLA genes associated with the immune response, also demonstrated strong signatures of selection. So, utilizing data from the 17th IHIW, a follow up analysis was then performed by leveraging over seven thousand HLA typed samples by NGS; in contrast, the genome wide scan did not include a detailed characterization of the HLA genes.  The strongest signals observed in the IHIW samples were in DQA1 and DQB1 in or around exon 2–the portion of the gene responsible for antigen presentation and most likely to be under environmental and evolutionary pressure. Our new statistical approach and analysis suggest novel evolutionary pressure in new regions and additionally highlight the importance of improved sequencing and characterization of variation across the extended MHC and other critical regions.
 
+
+LD-ABF is a test statistic that measures the amount of LD and density around a given SNP. 
+
+![Figure 1](https://github.com/tris-10/LD-ABF/blob/main/figures/BalancingSelectionOverTime.jpg)**Figure 1 Diagram depicting the progression of an allele under balancing selection** 
+*The green X is under balancing selection. In the first pane the variant is introduced on a single haplotype. Then after some time has passed evolutionary pressures favoring heterozygotes at the position of focus maintaining both haplotypes with and without the polymorphism, where hitchhiking effects are observed between the variant under balancing selection–inducing LD patterns.  Recombination breaks the strong LD resulting in mosaics of the haplotypes, where strong hotspots will diffuse the effects.*
+
 Manuscript under review, further details to come.
+
 
 -----------------------------------------------------
 ### Download LD-ABF supplemental files.
@@ -18,12 +25,6 @@ Supplemental files from the manuscript can be found online here:
 This includes the statistics for each of the different populations for the two different data sets along with some additional plots and tables. 
 
 ## Running LD-ABF
-
-LD-ABF is a test statistic that measures the amount of LD and density around a given SNP. 
-
-![Figure 1](https://github.com/tris-10/LD-ABF/blob/main/figures/BalancingSelectionOverTime.jpg)**Figure 1 Diagram depicting the progression of an allele under balancing selection** 
-*The green X is under balancing selection. In the first pane the variant is introduced on a single haplotype. Then after some time has passed evolutionary pressures favoring heterozygotes at the position of focus maintaining both haplotypes with and without the polymorphism, where hitchhiking effects are observed between the variant under balancing selection–inducing LD patterns.  Recombination breaks the strong LD resulting in mosaics of the haplotypes, where strong hotspots will diffuse the effects.*
-
 Python 3.7 and libraries required: `os, sys, argparse, time, datetime, pstats, cProfile, scipy, cython, shutil, glob, numpy, pandas, scipy, statsmodels, collections, itertools` 
 
 Sample input files and examples coming.
