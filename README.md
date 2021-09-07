@@ -15,7 +15,7 @@ Manuscript under review, further details to come.
 
 ## Running LD-ABF
 
-LD-ABF is a test statistic that measures the ammount of LD and density around a given SNP. 
+LD-ABF is a test statistic that measures the amount of LD and density around a given SNP. 
 
 ![Figure 1](https://github.com/tris-10/LD-ABF/blob/main/figures/BalancingSelectionOverTime.jpg)
 
