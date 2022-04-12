@@ -1,13 +1,13 @@
-# Linkage disequilibrium approximate Bayesian factor (LD-ABF) 
+# Linkage disequilibrium approximate Bayesian factor (LD-ABF)
 ## Improved Characterization of Balancing Selection Genome Wide and a Detailed Look at HLA Genes
 
-*Abstract:* Balancing selection occurs when different evolutionary pressures impact the fitness of multiple alleles, resulting in increased allelic diversity in the population. A new statistical method was developed to test for selection, improving inference by using efficient Bayesian techniques to test for density and strength of linkage disequilibrium. Evolutionary simulation studies showed that the method consistently outperformed existing methods. Using this methodology, we tested for novel signals of balancing selection genome wide in 500 samples from phased trios, combining both SNP array and exome sequencing data. Several novel signals of selection appeared in CYP2A7, GPC6, and CNR2 across multiple ancestries. Additionally, tests in SIRPA demonstrate dramatically strong selection signal, significantly higher than previously observed. Well-known signals around olfactory genes and the MHC, containing HLA genes associated with the immune response, also demonstrated strong signatures of selection. So, utilizing data from the 17th IHIW, a follow up analysis was then performed by leveraging over seven thousand HLA typed samples by NGS; in contrast, the genome wide scan did not include a detailed characterization of the HLA genes.  The strongest signals observed in the IHIW samples were in DQA1 and DQB1 in or around exon 2–the portion of the gene responsible for antigen presentation and most likely to be under environmental and evolutionary pressure. Our new statistical approach and analysis suggest novel evolutionary pressure in new regions and additionally highlight the importance of improved sequencing and characterization of variation across the extended MHC and other critical regions.
+*Abstract:* Balancing selection is when multiple alleles are kept at elevated frequencies in equilibrium due to opposing evolutionary pressures. A new statistical method, LD-ABF, was developed to test for selection using efficient Bayesian techniques, accounting for both the density of polymorphisms and strength of linkage disequilibrium. The method was used to analyze hundreds of clinical trios, thousands of HLA typed subjects, and whole-genome long-read samples. Long established tar-gets as well as 45 novel genes were identified. Among the established regions, signals across the MHC were recapitulated throughout all datasets. Taking advantage of high-resolution HLA typing and long-read sequencing data, we further characterize the MHC and key HLA genes in detail, revealing strong balancing selection in expected peptide-binding domains as well as previ-ously understudied intronic and intergenic regions of the HLA genes. Another immunoglobulin-like gene, SIRPA, demonstrated dramatic selection signal, significantly higher than previously noted. Selection peaks were also observed across multiple gene families whose biological functions fa-vor diversification through both allele polymorphism and gene duplications: olfactory receptor, immunoglobin, zinc-finger, etc. Together the study revealed balancing selection in new genomic regions and highlights the importance of employing novel statistical approaches and improved sequencing technologies for analyzing critical regions of the genome.
 
 
-LD-ABF is a test statistic that measures the amount of LD and density around a given SNP. 
+LD-ABF is a test statistic that measures the amount of LD and density of polymorphisms around a given SNP.
 
-![Figure 1](https://github.com/tris-10/LD-ABF/blob/main/figures/BalancingSelectionOverTime.jpg)**Figure 1 Diagram depicting the progression of an allele under balancing selection** 
-*The green X is under balancing selection. In the first pane the variant is introduced on a single haplotype. Then after some time has passed evolutionary pressures favoring heterozygotes at the position of focus maintaining both haplotypes with and without the polymorphism, where hitchhiking effects are observed between the variant under balancing selection–inducing LD patterns.  Recombination breaks the strong LD resulting in mosaics of the haplotypes, where strong hotspots will diffuse the effects.*
+![Figure 1](https://github.com/tris-10/LD-ABF/blob/main/figures/BalancingSelectionOverTime.jpg)**Figure 1 Diagram depicting the progression of an allele under balancing selection**
+*Evolutionary diagram depicting the progression of an allele under balancing selection The green X denotes the variant under selection, green triangles are variants originating on the same haplotype denoted by an orange line as the balancing selection variant, and blue triangles occur on an alternate haplotype denoted by an orange line. In the first pane the variant is introduced on a single haplotype. Then after some time has passed evolutionary pressures favoring multiple alleles  at the position of focus maintaining both haplotypes with and without the polymorphism, where hitchhiking effects are observed around the variant under balancing selection–inducing LD patterns.  Recombination breaks the strong LD resulting in mosaics of the haplotypes, where strong hotspots will diffuse the LD effects of hitchhiking.*
 
 Manuscript under review, further details to come.
 
@@ -16,18 +16,18 @@ Manuscript under review, further details to come.
 ### Download LD-ABF supplemental files.
 
 Supplemental files from the manuscript can be found online here:
- 
-[Genome Wide scan of CHOP Trios](https://upenn.box.com/s/yikbstl82z8g5negl7mbwd7epqapkab5), 
+
+[Genome Wide scan of CHOP Trios](https://upenn.box.com/s/yikbstl82z8g5negl7mbwd7epqapkab5),
 [HLA genes from IHIW](https://upenn.box.com/s/vqtso3lhyckwuud0qpjpkp1yd8hx636j)
 
-This includes the statistics for each of the different populations for the two different data sets along with some additional plots and tables. 
+This includes the statistics for each of the different populations for the two different data sets along with some additional plots and tables.
 
 ## Running LD-ABF
-Python 3.7 and libraries required: `os, sys, argparse, time, datetime, pstats, cProfile, scipy, cython, shutil, glob, numpy, pandas, scipy, statsmodels, collections, itertools` 
+Python 3.7 and libraries required: `os, sys, argparse, time, datetime, pstats, cProfile, scipy, cython, shutil, glob, numpy, pandas, scipy, statsmodels, collections, itertools`
 
 Sample input files and examples coming.
 
-To run LD-ABF: 
+To run LD-ABF:
 
 
 ```
@@ -99,8 +99,8 @@ CHROM                 POS                   ID                    REF           
 ```
 
 
-Or let's say you want to run the LD-ABF test over a region in a bed file, say region defined by the first line of regions.bed for the same scenario. 
- 
+Or let's say you want to run the LD-ABF test over a region in a bed file, say region defined by the first line of regions.bed for the same scenario.
+
 ```
 lineNum=1
 bedFile="regions.bed"
