@@ -304,14 +304,22 @@ def readCompressedVcfOverIntervalAndGetHaps(chromosome, startPos, endPos, vcfFil
                 # May want to make this more explicit, we later clean this up and remove it
                 # since the chrom is set to null signaling to remove
                 vcfTable.at[outputIndex, CHROM_COL] = np.nan
-            if len(alleleSet)==2 and len(record.alts)==2:
+            #Less common situation where at a multi-allelic site in our samples it's biallelic,
+            # ie only 2 alleles observed in the sample ref/alt instead of multiple alleles like ref A and alts: G,C
+            if len(alleleSet)==2 and len(record.alts)>1:
                 if DEBUG:
-                    print("Warning, at chrom %s and positions %s we have a mutli-allelic site we're recoding since it is biallelic in our sample,\n ref %s and alts: %s" %\
-                      (record.chrom,record.pos,record.ref,altSetString))
                     print("alleleSet observed:")
                     print(alleleSet)
                 if alleleSet != {0,1}:
+                    print("Warning, at chrom %s and positions %s we have a mutli-allelic site we're recoding "
+                          "since it is biallelic in our sample,\n ref %s and alts: %s codedes as %s so %s items" % \
+                        (record.chrom, record.pos, record.ref, altSetString, str(alleleSet), len(alleleSet)))
+                    if DEBUG:
+                        print("\n\n\n Coding BEFORE Fixed: ")
+                        print(vcfTable.loc[outputIndex])
+                        print("\n\n\n")
                     minAllele = min(list(alleleSet))
+
                     for key, value in record.samples.iteritems():
                         if vcfTable.at[outputIndex, key+MOM_HAP_SUFFIX] == minAllele:
                             vcfTable.at[outputIndex, key + MOM_HAP_SUFFIX] = 0
@@ -329,6 +337,10 @@ def readCompressedVcfOverIntervalAndGetHaps(chromosome, startPos, endPos, vcfFil
                                     (record.chrom, record.pos, record.ref, altSetString))
                         else:
                             vcfTable.at[outputIndex, key + DAD_HAP_SUFFIX] = 1
+                    if DEBUG:
+                        print("\n\n\n We filtered out mutliallelic sites thar are really biallelic in our set vcfTable.at[outputIndex, :]")
+                        print(vcfTable.loc[outputIndex])
+                        print("\n\n\n")
             if len(alleleSet) == 1 and not KeepMonomorphicSites:
                 if DEBUG:
                     print("Warning, at chrom %s and positions %s we have a monomorphic site so we're removing, ref %s and alts: %s" % \

@@ -426,7 +426,7 @@ def ouputWhentUnableToRun(start,  outputFilePrefix):
         columns=[CHROM_COL, POS_COL, ID_COL, REF_COL, ALT_COL,
                  LOG_F_ABF_COL, LINKAGE_SUM_COL, SUM_CORR_COL,
                  DENSITY_IN_WIN_COL,MAF_COL])
-    scoresDf.to_csv(outputFilePrefix + ".tsv", sep='\t', header=True, index=False)
+    scoresDf.to_csv(outputFieP8efix + ".tsv", sep='\t', header=True, index=False)
 
     done = datetime.datetime.now()
     elapsed = done - start
@@ -437,7 +437,7 @@ def ouputWhentUnableToRun(start,  outputFilePrefix):
 
 # runFullyBayes,
 def runScan(windowSize, chromosome, startPos, endPos, minMaf, singlePos, inputAreHaps, inputFile, outputFilePrefix,
-            meltIt, sampleMethod, draws, tune, DEBUG=False):
+             DEBUG=False):
     start = datetime.datetime.now()
     ableToRun = True
     # pre-specified chromosome and start and end positions to scan over, otherwise doing just 1 position if singlePos
@@ -463,7 +463,7 @@ def runScan(windowSize, chromosome, startPos, endPos, minMaf, singlePos, inputAr
             if polymorphicGeno.shape[1] == 0:
                 print("Error, unable to run because there are no polymorphic regions, double check input. ")
                 ableToRun = False
-                scoresDf = pd.DataFrame(columns=[POS_COL, LOO_SCORE_COL])
+                scoresDf = pd.DataFrame(columns=[POS_COL, LOG_F_ABF_COL])
             if ableToRun:
                 if DEBUG:
                     print("Running scan across multiple positions")
@@ -650,9 +650,7 @@ def main():
     if args.DEBUG:
         print("Warning, running in debug with more details printed out...")
     runScan(args.windowSize, args.chromosome, args.startPos, args.endPos, args.minMaf, args.singlePos,
-                args.inputAreHaps, args.inputFile, args.outputFilePrefix, meltIt=args.meltIt,
-                sampleMethod=args.sampleMethod,
-                draws=args.draws, tune=args.tune, DEBUG=args.DEBUG)
+                args.inputAreHaps, args.inputFile, args.outputFilePrefix, DEBUG=args.DEBUG)
     done = datetime.datetime.now()
     elapsed = done - start
     duration = ':'.join(str(elapsed).split(':')[1:])
