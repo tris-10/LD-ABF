@@ -9133,15 +9133,15 @@ label {
 }
 /* Flexible box model classes */
 /* Taken from Alex Russell http://infrequently.org/2009/08/css-3-progress/ */
-/* This file is a compatability layer.  It allows the usage of flexible box 
+/* This file is a compatability layer.  It allows the usage of flexible box
 model layouts accross multiple browsers, including older browsers.  The newest,
 universal implementation of the flexible box model is used when available (see
-`Modern browsers` comments below).  Browsers that are known to implement this 
+`Modern browsers` comments below).  Browsers that are known to implement this
 new spec completely include:
 
     Firefox 28.0+
     Chrome 29.0+
-    Internet Explorer 11+ 
+    Internet Explorer 11+
     Opera 17.0+
 
 Browsers not listed, including Safari, are supported via the styling under the
@@ -12523,7 +12523,7 @@ div#pager .ui-resizable-handle {
   background: #f7f7f7;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
-  /* This injects handle bars (a short, wide = symbol) for 
+  /* This injects handle bars (a short, wide = symbol) for
         the resize handle. */
 }
 div#pager .ui-resizable-handle::after {
@@ -13037,14 +13037,14 @@ div#notebook {
   div.cell {
     display: block;
     page-break-inside: avoid;
-  } 
-  div.output_wrapper { 
-    display: block;
-    page-break-inside: avoid; 
   }
-  div.output { 
+  div.output_wrapper {
     display: block;
-    page-break-inside: avoid; 
+    page-break-inside: avoid;
+  }
+  div.output {
+    display: block;
+    page-break-inside: avoid;
   }
 }
 </style>
@@ -13323,7 +13323,7 @@ $$var\left(\hat{\beta}_{1j}\right)=\frac{1}{7}+\frac{1}{1}+\frac{1}{\color{red}0
 <hr/>
 
 
-<p>A useful set of techniques to overcome problems of separation and sparsity of data are penalization methods, having both frequentist and Bayesian foundations. Penalty functions are used to drive parameter estimates to zero by incurring a cost on including parameters in the model, where they are typically thought of as being effective in high dimensional settings. For example, a common penalized regression example is Lasso, <font size=2>$y_i～X{\boldsymbol{\beta}}+\lambda|\beta|$</font>, where you add in another term because you’re in a high dimensional setting where you think many of the coefficients should actually have zero effect size–by introducing a penalty on the coefficients it shrinks them towards zero. Greenland and coauthors (Greenland and Mansournia 2015; Greenland 2007; 2003; Mansournia et al. 2018) have done extensive work looking at penalized functions or equivalent Bayesian techniques, especially in settings of binary outcomes, and the implications for reducing bias and mean square error (MSE) in settings of separation and sparsity. Greenland proposes using a class of loss functions proportional the information matrix, <font size=2>$r({\boldsymbol{\beta}})=ln(|I({\boldsymbol{\beta}})|)^m$</font>. The penalized log likelihood can be written in the form: 
+<p>A useful set of techniques to overcome problems of separation and sparsity of data are penalization methods, having both frequentist and Bayesian foundations. Penalty functions are used to drive parameter estimates to zero by incurring a cost on including parameters in the model, where they are typically thought of as being effective in high dimensional settings. For example, a common penalized regression example is Lasso, <font size=2>$y_i～X{\boldsymbol{\beta}}+\lambda|\beta|$</font>, where you add in another term because you’re in a high dimensional setting where you think many of the coefficients should actually have zero effect size–by introducing a penalty on the coefficients it shrinks them towards zero. Greenland and coauthors (Greenland and Mansournia 2015; Greenland 2007; 2003; Mansournia et al. 2018) have done extensive work looking at penalized functions or equivalent Bayesian techniques, especially in settings of binary outcomes, and the implications for reducing bias and mean square error (MSE) in settings of separation and sparsity. Greenland proposes using a class of loss functions proportional the information matrix, <font size=2>$r({\boldsymbol{\beta}})=ln(|I({\boldsymbol{\beta}})|)^m$</font>. The penalized log likelihood can be written in the form:
 <font size=2>
 $$p(y_i|{\boldsymbol{\beta}})～l({\boldsymbol{\beta}})+\color{green}{\frac{m}{2}{\boldsymbol{\beta}}-mlog(1+e^{\boldsymbol{\beta}})}\quad\quad\quad\quad(1)$$
 </font>
@@ -13416,7 +13416,7 @@ Where <font size=2>$l({\boldsymbol{\beta}})$</font>is the standard Bernoulli log
 </tbody>
 </table>
 <p>To test for association between a test SNP and neighboring variant, we use the approximate Bayes factor. The Bayes factor (Kass and Raftery 1995) has been used in a variety of settings including in extensive use GWAS  (Wakefield 2009; 2007; M. H. Chen et al. 2020; Maller et al. 2012). The approximate Bayes factor in this setting, plugging in equation (1), is:
-<font size=2> 
+<font size=2>
 $$ABF_j=\frac{P(y|M_{1,j})}{P(y|M_{0,j})}=\frac
 {l(\beta_0,\beta_1)+\frac{m}{2}\beta_0-mlog(1+e^{\beta_0})+\frac{m}{2}\beta_1-mlog(1+e^{\beta_1})}
 {l(\beta_0)+\frac{m}{2}\beta_0-mlog(1+e^{\beta_0})}\quad\quad(2)$$
@@ -13449,7 +13449,7 @@ $$ABF_j=\frac{P(y|M_{1,j})}{P(y|M_{0,j})}=\frac
 <span class="n">augmentX</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">testCol</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">interceptCol</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]})</span>
 <span class="n">m</span><span class="o">=</span><span class="mi">1</span>  <span class="c1">#log F(m,m) priori where m=1</span>
 <span class="c1">##Add weight for augmented data</span>
-<span class="n">augmentX</span><span class="p">[</span><span class="n">weightCol</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span> <span class="o">/</span> <span class="mf">2.0</span> 
+<span class="n">augmentX</span><span class="p">[</span><span class="n">weightCol</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span> <span class="o">/</span> <span class="mf">2.0</span>
 <span class="n">augmentedInput</span> <span class="o">=</span> <span class="n">startingTestValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">augmentX</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">augmentY</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">neighborCol</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]})</span>
 <span class="n">augmentedOutput</span> <span class="o">=</span> <span class="n">startingNeighborValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">augmentY</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -13674,7 +13674,7 @@ $$log\,ABF=\frac{1}{W}log\prod_{j=1}^W
 <p>So, the same steps as above would be repeated for each of the neighboring SNPs within the given window.</p>
 =======
 <p>So, the same steps as above would be repeated for each of the neighboring SNPs within the given window. </p>
->>>>>>> b0c8f77b4727d07a3e269cbc5cf4028378a2390d
+
 
 </div>
 </div>
@@ -13702,7 +13702,7 @@ $$log\,ABF=\frac{1}{W}log\prod_{j=1}^W
 
 </body>
 
- 
+
 
 
 </html>
