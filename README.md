@@ -9,10 +9,13 @@ LD-ABF is a test statistic that measures the amount of LD and density of polymor
 ![Figure 1](https://github.com/tris-10/LD-ABF/blob/main/figures/BalancingSelectionOverTime.jpg)**Figure 1 Diagram depicting the progression of an allele under balancing selection**
 *Evolutionary diagram depicting the progression of an allele under balancing selection The green X denotes the variant under selection, green triangles are variants originating on the same haplotype denoted by an orange line as the balancing selection variant, and blue triangles occur on an alternate haplotype denoted by an orange line. In the first pane the variant is introduced on a single haplotype. Then after some time has passed evolutionary pressures favoring multiple alleles  at the position of focus maintaining both haplotypes with and without the polymorphism, where hitchhiking effects are observed around the variant under balancing selection–inducing LD patterns.  Recombination breaks the strong LD resulting in mosaics of the haplotypes, where strong hotspots will diffuse the LD effects of hitchhiking.*
 
-Manuscript under review, further details to come.
+Manuscript under review, further details to come. For a detailed description of the statistical method, check out our [LD-ABF toy example](https://tris-10.github.io/LD-ABF/documentation/LD_ABF_toyExample
+)
 
 
 -----------------------------------------------------
+
+
 ### Download LD-ABF supplemental files.
 
 Supplemental files from the manuscript can be found online here:
