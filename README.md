@@ -1,7 +1,7 @@
 # Linkage disequilibrium approximate Bayesian factor (LD-ABF)
-## Improved Characterization of Balancing Selection Genome Wide and a Detailed Look at HLA Genes
+## Improved Characterization of Balancing Selection over the MHC and Revealing Novel Evolutionary Pressures Genome Wide
 
-*Abstract:* Balancing selection is when multiple alleles are kept at elevated frequencies in equilibrium due to opposing evolutionary pressures. A new statistical method, LD-ABF, was developed to test for selection using efficient Bayesian techniques, accounting for both the density of polymorphisms and strength of linkage disequilibrium. The method was used to analyze hundreds of clinical trios, thousands of HLA typed subjects, and whole-genome long-read samples. Long established tar-gets as well as 45 novel genes were identified. Among the established regions, signals across the MHC were recapitulated throughout all datasets. Taking advantage of high-resolution HLA typing and long-read sequencing data, we further characterize the MHC and key HLA genes in detail, revealing strong balancing selection in expected peptide-binding domains as well as previ-ously understudied intronic and intergenic regions of the HLA genes. Another immunoglobulin-like gene, SIRPA, demonstrated dramatic selection signal, significantly higher than previously noted. Selection peaks were also observed across multiple gene families whose biological functions fa-vor diversification through both allele polymorphism and gene duplications: olfactory receptor, immunoglobin, zinc-finger, etc. Together the study revealed balancing selection in new genomic regions and highlights the importance of employing novel statistical approaches and improved sequencing technologies for analyzing critical regions of the genome.
+*Abstract:* Balancing selection occurs when multiple alleles are kept at elevated frequencies in equilibrium due to opposing evolutionary pressures. A new statistical method was developed to test for selection using efficient Bayesian techniques. Selection signals in three different data sets, generated with variable sequencing technologies, were compared: clinical trios, HLA NGS typed samples, and whole-genome long-read samples. Genome-wide, selection was observed across multiple gene families whose biological functions favor diversification, revealing established targets as well as 45 novel genes under selection. Using high-resolution HLA typing and long-read sequencing data, for the characterization of the MHC, revealed strong selection in expected pep-tide-binding domains as well as previously understudied intronic and intergenic regions of the MHC. Surprisingly, SIRPA, demonstrated dramatic selection signal, second only to the MHC in most settings. In conclusion, employing novel statistical approaches and improved sequencing technologies is critical to properly analyze complex genomic regions.
 
 
 LD-ABF is a test statistic that measures the amount of LD and density of polymorphisms around a given SNP.
@@ -20,10 +20,11 @@ Manuscript under review, further details to come. For a detailed description of 
 
 Supplemental files from the manuscript can be found online here:
 
-[Genome Wide scan of CHOP Trios](https://upenn.box.com/s/yikbstl82z8g5negl7mbwd7epqapkab5),
-[HLA genes from IHIW](https://upenn.box.com/s/vqtso3lhyckwuud0qpjpkp1yd8hx636j)
+[CHOP Clinical Samples, Genome Wide scan in HG19 and peaks](https://upenn.box.com/s/1tf0llnlvd6vjanurq7z45iziytvycay),
+[17th IHIW and IMGT 3.25 samples, scan of HLA genes and haplotypes HG19](https://upenn.box.com/s/2dkykycdx2qhfcs97550pyvm6r6fpxs0)
+[Pangenome scan, peaks, and vcfs in HG38](https://upenn.box.com/s/3zn6vh8o6rrqxwn9w1l0zzc0bjfizju0)
 
-This includes the statistics for each of the different populations for the two different data sets along with some additional plots and tables.
+This includes the statistics for each of the different populations for the different data sets along with some additional plots and tables.
 
 ## Running LD-ABF
 Python 3.7 and libraries required: `os, sys, argparse, time, datetime, pstats, cProfile, scipy, cython, shutil, glob, numpy, pandas, scipy, statsmodels, collections, itertools`
