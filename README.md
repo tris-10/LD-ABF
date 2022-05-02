@@ -1,5 +1,5 @@
 # Linkage disequilibrium approximate Bayesian factor (LD-ABF)
-## Improved Characterization of Balancing Selection over the MHC and Revealing Novel Evolutionary Pressures Genome Wide
+## Improved detection of evolutionary selection highlights potential bias from different sequencing strategies in complex genomic-regions
 
 *Abstract:* Balancing selection occurs when multiple alleles are kept at elevated frequencies in equilibrium due to opposing evolutionary pressures. A new statistical method was developed to test for selection using efficient Bayesian techniques. Selection signals in three different data sets, generated with variable sequencing technologies, were compared: clinical trios, HLA NGS typed samples, and whole-genome long-read samples. Genome-wide, selection was observed across multiple gene families whose biological functions favor diversification, revealing established targets as well as 45 novel genes under selection. Using high-resolution HLA typing and long-read sequencing data, for the characterization of the MHC, revealed strong selection in expected pep-tide-binding domains as well as previously understudied intronic and intergenic regions of the MHC. Surprisingly, SIRPA, demonstrated dramatic selection signal, second only to the MHC in most settings. In conclusion, employing novel statistical approaches and improved sequencing technologies is critical to properly analyze complex genomic regions.
 
@@ -20,8 +20,10 @@ Manuscript under review, further details to come. For a detailed description of 
 
 Supplemental files from the manuscript can be found online here:
 
-[CHOP Clinical Samples, Genome Wide scan in HG19 and peaks](https://upenn.box.com/s/1tf0llnlvd6vjanurq7z45iziytvycay),
+[CHOP Clinical Samples, Genome Wide scan in HG19 and peaks](https://upenn.box.com/s/1tf0llnlvd6vjanurq7z45iziytvycay)
+
 [17th IHIW and IMGT 3.25 samples, scan of HLA genes and haplotypes HG19](https://upenn.box.com/s/2dkykycdx2qhfcs97550pyvm6r6fpxs0)
+
 [Pangenome scan, peaks, and vcfs in HG38](https://upenn.box.com/s/3zn6vh8o6rrqxwn9w1l0zzc0bjfizju0)
 
 This includes the statistics for each of the different populations for the different data sets along with some additional plots and tables.
