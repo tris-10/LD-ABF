@@ -19,11 +19,11 @@ Manuscript under review, further details to come. For a detailed description of 
 
 Supplemental files from the manuscript can be found online here:
 
-[CHOP Clinical Samples, genome wide scan in HG19, top selection peaks, and novel gene list (with PMID for genes found in literature)](https://upenn.box.com/s/1tf0llnlvd6vjanurq7z45iziytvycay)
+[CHOP Clinical Samples, genome wide scan in HG19, top selection peaks, and novel gene list (with PMID for genes found in literature)](https://zenodo.org/records/10612073)
 
-[17th IHIW and IMGT 3.25 samples, scan of HLA genes and haplotypes HG19](https://upenn.box.com/s/2dkykycdx2qhfcs97550pyvm6r6fpxs0)
+[17th IHIW and IMGT 3.25 samples, scan of HLA genes and haplotypes HG19](https://zenodo.org/records/10612073)
 
-[Pangenome, genome wide scan in HG38, top selection peaks, and vcfs](https://upenn.box.com/s/3zn6vh8o6rrqxwn9w1l0zzc0bjfizju0)
+[Pangenome, genome wide scan in HG38, top selection peaks, and vcfs](https://zenodo.org/records/10612073)
 
 This includes the statistics for each of the different populations for the different data sets along with some additional plots and tables.
 
