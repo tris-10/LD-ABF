@@ -25,6 +25,8 @@ from itertools import chain
 from os import path
 import GenicIO
 import GenicUtils
+import warnings
+
 
 #Test statistics and columns being reported
 LINKAGE_SUM_COL = "linkageSum"
@@ -277,13 +279,15 @@ def calcPairwiseLogfApproxBayesFactor(x, y,m=1, priorOnNull = True, DEBUG=False)
         # adding in augmentation on the null model as well
         newX = pd.DataFrame({xCol: [0, 0], interceptCol: [0, 0]})
         newX[weightCol] = m / 2.0
-        augmentX = augmentX.append(newX, ignore_index=True)
+        #augmentX = augmentX.append(newX, ignore_index=True)
+        augmentX = pd.concat([augmentX, newX], axis = 0)
         newY = pd.DataFrame({yCol: [0, 1]})
-        augmentY = augmentY.append(newY, ignore_index=True)
+        #augmentY = augmentY.append(newY, ignore_index=True)
+        augmentY = pd.concat([augmentY, newY], axis = 0)
         try:
             interceptOnlyFit = sm.Logit(augmentY, augmentX[interceptCol],
                                     freq_weights=augmentX[weightCol],
-                                        disp=np.int(DEBUG)).fit()
+                                        disp=int(DEBUG)).fit()
         except Exception as e:
             print("augmentX")
             print(augmentX)
@@ -301,22 +305,26 @@ def calcPairwiseLogfApproxBayesFactor(x, y,m=1, priorOnNull = True, DEBUG=False)
         logLikePerObsInter = yFloat * np.log(yPred) + (1 - yFloat) * np.log(1 - yPred)
         logLikelihoodInter = logLikePerObsInter.sum() + m / 2.0 * beta0inter - m * np.log(1 + np.exp(beta0inter))
     else:
-        interceptOnlyFit = sm.Logit(yFloat, augmentX[interceptCol],disp=np.int(DEBUG)).fit()
+        interceptOnlyFit = sm.Logit(yFloat, augmentX[interceptCol],disp=int(DEBUG)).fit()
         logLikelihoodInter=interceptOnlyFit.llf
         #now add in augmentation even though not using for this model
         newX = pd.DataFrame({xCol: [0, 0], interceptCol: [0, 0]})
         newX[weightCol] = m / 2.0
-        augmentX = augmentX.append(newX, ignore_index=True)
+        #augmentX = augmentX.append(newX, ignore_index=True)
+        augmentX = pd.concat([augmentX, newX], axis = 0)
         newY = pd.DataFrame({yCol: [0, 1]})
-        augmentY = augmentY.append(newY, ignore_index=True)
+        #augmentY = augmentY.append(newY, ignore_index=True)
+        augmentY = pd.concat([augmentY, newY], axis = 0)
     newX = pd.DataFrame({xCol: [1, 1], interceptCol: [0, 0]})
     newX[weightCol]=m/2.0
-    augmentX= augmentX.append(newX,ignore_index=True)
+    #augmentX= augmentX.append(newX,ignore_index=True)
+    augmentX = pd.concat([augmentX, newX], axis = 0)
     newY = pd.DataFrame({yCol:[0,1]})
-    augmentY=augmentY.append(newY, ignore_index=True)
+    #augmentY=augmentY.append(newY, ignore_index=True)
+    augmentY = pd.concat([augmentY, newY], axis = 0)
     try:
         logitFit = sm.Logit(augmentY.astype(float), augmentX[[interceptCol, xCol]],
-                        freq_weights=augmentX[weightCol],disp=np.int(DEBUG)).fit()
+                        freq_weights=augmentX[weightCol],disp=int(DEBUG)).fit()
     except Exception as e:
         print("augmentX")
         print(augmentX)
@@ -390,10 +398,10 @@ def readInGenomes(windowSize, chromosome, startPos, endPos, singlePos, inputAreH
     else:
         # let's restrict to looking over the region plus the window (half on each end)
         if runningOverRegion:
-            startPos = np.int(startPos)
-            endPos = np.int(endPos)
-            startPosWithWindow = np.int(np.max([0, startPos - np.ceil(windowSize / 2)]))
-            endPosWithWindow = np.int(endPos + np.ceil(windowSize / 2))
+            startPos = int(startPos)
+            endPos = int(endPos)
+            startPosWithWindow = int(np.max([0, startPos - np.ceil(windowSize / 2)]))
+            endPosWithWindow = int(endPos + np.ceil(windowSize / 2))
         if inputFile.endswith('.gz'):
             if chromosome is None or startPos is None or endPos is None:
                 print(
@@ -409,7 +417,7 @@ def readInGenomes(windowSize, chromosome, startPos, endPos, singlePos, inputAreH
 
     if runningOverRegion:
         genomes[POS_COL] = genomes.index
-        genomes[POS_COL] = genomes[POS_COL].astype(np.int)
+        genomes[POS_COL] = genomes[POS_COL].astype(int)
         genomes=genomes[genomes[POS_COL].between(startPosWithWindow, endPosWithWindow)]
         genomes = ((genomes.set_index(POS_COL)))
     return genomes
@@ -438,6 +446,7 @@ def ouputWhentUnableToRun(start,  outputFilePrefix):
 # runFullyBayes,
 def runScan(windowSize, chromosome, startPos, endPos, minMaf, singlePos, inputAreHaps, inputFile, outputFilePrefix,
              DEBUG=False):
+    warnings.filterwarnings("ignore")
     start = datetime.datetime.now()
     ableToRun = True
     # pre-specified chromosome and start and end positions to scan over, otherwise doing just 1 position if singlePos
@@ -452,8 +461,8 @@ def runScan(windowSize, chromosome, startPos, endPos, minMaf, singlePos, inputAr
         # putting in double check removal of non-polymorphic sites for nultiallic regions
         alleleFreqs, polymorphicGenoVcf = GenicUtils.getPolyMorphicSites(genomes, minMaf, DEBUG)
         #Let's get just the genotypes but keep the
-        startCols = set(OUTPUT_START_COLS) - set([POS_COL])
-        hapCols = set(polymorphicGenoVcf.columns) - startCols
+        startCols = (set(OUTPUT_START_COLS) - set([POS_COL]))
+        hapCols = list(set(polymorphicGenoVcf.columns) - startCols)
         polymorphicGeno= (polymorphicGenoVcf[hapCols]).T
         if polymorphicGeno.shape[1] == 0:
             print("Error, there appear to be no polymorphic sites.")
@@ -493,16 +502,16 @@ def runScan(windowSize, chromosome, startPos, endPos, minMaf, singlePos, inputAr
             scoresDf.index.name = POS_COL
 
         else:
-            if not np.int(singlePos) in polymorphicGeno.columns:
+            if not int(singlePos) in polymorphicGeno.columns:
                 print(
                     "\n\nError! Position %s being tested is not input or is not polymorphic (in MAF restriction), double check sample." % singlePos)
                 print(
                     "The position could also be an indel or missing allele (like for IMGT samples). Excluding these is to be expected")
-                if np.int(singlePos) in genomes.T.columns:
+                if int(singlePos) in genomes.T.columns:
                     print("Unadjusted frequency: ")
                     print(genomes.T[singlePos][hapCols].mean())
                     print("Adjusted frequency (handling nulls and minor allele coded) ")
-                    freqAtPos = alleleFreqs[np.int(singlePos)]
+                    freqAtPos = alleleFreqs[np.int64(singlePos)]
                     print("With frequency in sample %s" % freqAtPos)
                 else:
                     print("not found, no allele frequency for %s" % singlePos)
@@ -511,7 +520,7 @@ def runScan(windowSize, chromosome, startPos, endPos, minMaf, singlePos, inputAr
                 if DEBUG:
                     print("Running on a single position.")
 
-                testSnp = polymorphicGeno[np.int(singlePos)]
+                testSnp = polymorphicGeno[int(singlePos)]
                 # if multi-allelic at input SNP, run over each one
                 if type(testSnp) is pd.DataFrame:
                     print("Warning, multi-allelic site...")
@@ -536,24 +545,24 @@ def runScan(windowSize, chromosome, startPos, endPos, minMaf, singlePos, inputAr
                                                   SUM_CORR_COL: sumCorr, DENSITY_IN_WIN_COL: densityInWin})
                     scoresDf.index.name = POS_COL
                 else:
-                    summLD = runCalcPairwiseLDoverWindow(testSnp=polymorphicGeno[np.int(singlePos)],
+                    summLD = runCalcPairwiseLDoverWindow(testSnp=polymorphicGeno[int(singlePos)],
                                                          windowSize=windowSize,
                                                          polymorphicGeno=polymorphicGeno, DEBUG=DEBUG)
 
-                    sumCorr = runCalcRsquaredOverWindow(testSnp=polymorphicGeno[np.int(singlePos)],
+                    sumCorr = runCalcRsquaredOverWindow(testSnp=polymorphicGeno[int(singlePos)],
                                                         windowSize=windowSize,
                                                         polymorphicGeno=polymorphicGeno, DEBUG=DEBUG)
-                    densityInWin=runCalcDensityOverWindow(testSnp=polymorphicGeno[np.int(singlePos)],
+                    densityInWin=runCalcDensityOverWindow(testSnp=polymorphicGeno[int(singlePos)],
                                                         windowSize=windowSize,
                                                         polymorphicGeno=polymorphicGeno, DEBUG=DEBUG)
-                    logF_ABF =runCalcLogFApproxBayesFacOverWindow(testSnp=polymorphicGeno[np.int(singlePos)],
+                    logF_ABF =runCalcLogFApproxBayesFacOverWindow(testSnp=polymorphicGeno[int(singlePos)],
                                                                     windowSize=windowSize,
                                                                   polymorphicGeno=polymorphicGeno, DEBUG=DEBUG)
                     if DEBUG:
                         print("Only ran ABF")
                     scoresDf = pd.DataFrame({ LOG_F_ABF_COL: logF_ABF,  LINKAGE_SUM_COL: summLD,
                                              SUM_CORR_COL: sumCorr, DENSITY_IN_WIN_COL: densityInWin},
-                                            index=[np.int(singlePos)])
+                                            index=[int(singlePos)])
                     scoresDf.index.name = POS_COL
 
         if not ableToRun:
@@ -566,7 +575,7 @@ def runScan(windowSize, chromosome, startPos, endPos, minMaf, singlePos, inputAr
                 print("\n\nRestricting to test region (removing window boarders)")
                 print(scoresDf.head())
             scoresDf[POS_COL] = scoresDf.index
-            scoresDf[POS_COL] = scoresDf[POS_COL].astype(np.int)
+            scoresDf[POS_COL] = scoresDf[POS_COL].astype(int)
             if DEBUG:
                 print("Cleaning up the scores table so we're over desired region, currently %s to %s" %
                   (scoresDf[POS_COL].min(), scoresDf[POS_COL].max()))
@@ -599,7 +608,7 @@ def runScan(windowSize, chromosome, startPos, endPos, minMaf, singlePos, inputAr
                 scoresDf[MAF_COL]=polymorphicGenoVcf[hapCols].mean(axis=1)
                 outputTable = pd.concat([polymorphicGenoVcf[OUTPUT_START_COLS], scoresDf], axis=1)
             else:
-                polymorphicGenoVcfAtPos = polymorphicGenoVcf[polymorphicGenoVcf[POS_COL]== np.int(singlePos)]
+                polymorphicGenoVcfAtPos = polymorphicGenoVcf[polymorphicGenoVcf[POS_COL]== int(singlePos)]
                 scoresDf[MAF_COL] = polymorphicGenoVcfAtPos[hapCols].mean(axis=1)
                 outputTable = pd.concat([polymorphicGenoVcfAtPos[OUTPUT_START_COLS], scoresDf], axis=1)
             outputTable[LOG_F_ABF_COL]=outputTable[LOG_F_ABF_COL]/windowSize

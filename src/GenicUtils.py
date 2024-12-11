@@ -73,7 +73,7 @@ def codeToMinorAllele(testGeno,axis=0):
     return testGeno.apply(codeArrayToMinorAllele,axis=axis)
 
 def codeArrayToMinorAllele(snp):
-    snpCopy = snp.copy().astype(np.float)
+    snpCopy = snp.copy().astype(float)
     if np.nanmean(snpCopy.values)>0.5:
         snpCopy = (snpCopy - 1) ** 2
     return snpCopy
@@ -101,13 +101,13 @@ def getPolyMorphicSites(genomes, minMaf, DEBUG=False):
     :return:
     """
     genomesCopy = genomes.copy()
-    hapCols = set(genomesCopy.columns) - set(OUTPUT_START_COLS)
+    hapCols = list(set(genomesCopy.columns) - set(OUTPUT_START_COLS))
     genomesCopy = genomesCopy.T
     #Let's deal with multi-allelic positions adding a decimal place
     genomesCopy.columns = renameDupColsIntPlusOffset(genomesCopy)
     genomesCopy = genomesCopy.T
     # let's make sure everything is in minor allele sets
-    if True:
+    if DEBUG:
         print(genomesCopy.head())
         incorrectlyCoded = genomesCopy[genomesCopy[hapCols].mean(1) > 0.5]
         print("Testing, before recoding to minor allele ")
@@ -127,7 +127,7 @@ def getPolyMorphicSites(genomes, minMaf, DEBUG=False):
     polymorphicSites = (alleleFreqs[alleleFreqs.between(minMaf, 1 - minMaf)]).index
     # Now let's swap out the old genomes and add the properly MAF coded ones in
     # With first step get the starting columns but, POS column is actual the index, may want to change this
-    startCols = set(OUTPUT_START_COLS) - set([POS_COL])
+    startCols = list(set(OUTPUT_START_COLS) - set([POS_COL]))
     genomesCopy=pd.concat([genomesCopy[startCols],genomesMafNoDupPos],axis=1)
     if genomes.shape[0]!=genomesCopy.shape[0] or genomes.shape[1]!=genomesCopy.shape[1]:
         print("Error, in attempting to recode alleles to MAF something went wrong oringinal")

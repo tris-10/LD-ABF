@@ -205,8 +205,8 @@ def readVcfIntoDataFrame(vcfFile,splitPhasedHaps=True,DEBUG=False):
         for indivId in indivColumns:
             vcfDf[[indivId + MOM_HAP_SUFFIX, indivId + DAD_HAP_SUFFIX]] = \
                 vcfDf[indivId].str.split('|', expand=True)
-            vcfDf[indivId + MOM_HAP_SUFFIX] = vcfDf[indivId + MOM_HAP_SUFFIX].astype(np.int)
-            vcfDf[indivId + DAD_HAP_SUFFIX] = vcfDf[indivId + MOM_HAP_SUFFIX].astype(np.int)
+            vcfDf[indivId + MOM_HAP_SUFFIX] = vcfDf[indivId + MOM_HAP_SUFFIX].astype(np.int64)
+            vcfDf[indivId + DAD_HAP_SUFFIX] = vcfDf[indivId + MOM_HAP_SUFFIX].astype(np.int64)
         if DEBUG:
             print("Phased haplotypes split up: ")
             print(vcfDf.head())
