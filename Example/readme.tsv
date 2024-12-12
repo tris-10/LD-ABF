@@ -1,0 +1,10 @@
+##Getting Started
+#To help you get started, an example is provided to demonstrate how to run the tool and get the results
+
+##Example Usage
+#To execute the example and test the tool's functionality:
+Run the shell script provided in the repository:
+sh runExample.sh
+
+Upon successful execution, the output file chr6_149721689_149772647.tsv will be generated in the output folder.
+
